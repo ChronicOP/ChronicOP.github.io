@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prathamesh Patil | AI Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-cyan: #0ff;
+            --deep-space: #0a192f;
+            --stardust: #e6f1ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--deep-space);
+            color: var(--stardust);
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .cyber-border {
+            position: fixed;
+            pointer-events: none;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.3; }
+        }
+
+        .terminal-text {
+            font-family: 'Courier New', monospace;
+            border-right: 2px solid var(--neon-cyan);
+            animation: typing 1s steps(40) infinite;
+        }
+
+        .ai-particle {
+            position: absolute;
+            background: radial-gradient(circle, var(--neon-cyan) 10%, transparent 70%);
+            opacity: 0.3;
+        }
+
+        .neon-card {
+            background: rgba(10, 25, 47, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .neon-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--neon-cyan);
+        }
+
+        .neon-btn {
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 12px 25px;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .neon-btn:hover {
+            background: var(--neon-cyan);
+            color: var(--deep-space);
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-bg" id="matrix"></canvas>
+    <div class="cyber-border" style="top:0;left:0;right:0;height:60px"></div>
+
+    <header class="container mx-auto text-center py-20">
+        <h1 class="text-4xl mb-4 terminal-text" data-text="Prathamesh_Patil>_">Prathamesh_Patil>_</h1>
+        <div class="text-neon-cyan text-xl mb-8">AI Developer | Machine Learning Engineer</div>
+        <div class="flex justify-center gap-4">
+            <a href="#projects" class="neon-btn">Projects</a>
+            <a href="#skills" class="neon-btn">Skills</a>
+        </div>
+    </header>
+
+    <section id="about" class="container mx-auto py-20">
+        <div class="neon-card p-8 mb-8">
+            <h2 class="text-2xl mb-4">🧠 AI Developer Profile</h2>
+            <p class="opacity-80">Aspiring AI Engineer with hands-on experience in developing healthcare and e-commerce analytics solutions. Combining theoretical knowledge with practical implementation skills in Python and NLP.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="neon-card p-8">
+                <h3 class="text-xl mb-4">🚀 Core Expertise</h3>
+                <ul class="list-disc pl-6 opacity-80">
+                    <li>Healthcare AI Solutions</li>
+                    <li>Natural Language Processing</li>
+                    <li>Predictive Analytics</li>
+                    <li>Data Visualization</li>
+                </ul>
+            </div>
+
+            <div class="neon-card p-8">
+                <h3 class="text-xl mb-4">📈 Tech Stack</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-3 py-1 rounded-full bg-neon-cyan/10 text-neon-cyan">Python</span>
+                    <span class="px-3 py-1 rounded-full bg-neon-cyan/10 text-neon-cyan">TensorFlow</span>
+                    <span class="px-3 py-1 rounded-full bg-neon-cyan/10 text-neon-cyan">PyTorch</span>
+                    <span class="px-3 py-1 rounded-full bg-neon-cyan/10 text-neon-cyan">LangChain</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const drops = Array(Math.floor(canvas.width/10)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0ff';
+            ctx.font = '15px monospace';
+
+            drops.forEach((drop, i) => {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * 10, drop * 10);
+                drops[i] = drop > canvas.height/10 || Math.random() > 0.95 ? 0 : drop + 1;
+            });
+        }
+
+        setInterval(drawMatrix, 50);
+
+        // Terminal text effect
+        const terminalText = document.querySelector('.terminal-text');
+        let text = terminalText.getAttribute('data-text');
+        let index = 0;
+
+        function typeText() {
+            terminalText.textContent = text.slice(0, index++);
+            if(index > text.length) index = 0;
+        }
+        setInterval(typeText, 200);
+    </script>
+</body>
+</html>

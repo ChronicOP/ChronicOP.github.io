@@ -1,0 +1,210 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap');
+
+:root {
+  --neon-cyan: #0ff;
+  --deep-space: #0a192f;
+  --stardust: #e6f1ff;
+  --matrix-green: #0f0;
+  --pulse-interval: 2s;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--deep-space);
+  color: var(--stardust);
+  font-family: 'Exo 2', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Cyberpunk Elements */
+.cyber-border {
+  position: fixed;
+  pointer-events: none;
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 15px var(--neon-cyan);
+  animation: pulse var(--pulse-interval) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.3; }
+}
+
+/* Terminal Text Effect */
+.terminal-text {
+  font-family: 'Courier New', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-text::after {
+  content: "|";
+  position: absolute;
+  right: -10px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* AI Particles Background */
+.ai-particle {
+  position: absolute;
+  background: radial-gradient(circle, var(--neon-cyan) 10%, transparent 70%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Neon Cards */
+.neon-card {
+  background: rgba(10, 25, 47, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--neon-cyan);
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, var(--neon-cyan), transparent);
+  animation: glow 4s linear infinite;
+}
+
+@keyframes glow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.neon-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 30px var(--neon-cyan);
+}
+
+/* Neon Buttons */
+.neon-btn {
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  padding: 12px 25px;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.neon-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.neon-btn:hover {
+  background: var(--neon-cyan);
+  color: var(--deep-space);
+  box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.neon-btn:hover::before {
+  left: 100%;
+}
+
+/* Matrix Background */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 3.5rem;
+  background: linear-gradient(45deg, var(--neon-cyan), var(--matrix-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.py-20 { padding: 5rem 0; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-8 { margin-bottom: 2rem; }
+.text-center { text-align: center; }
+.flex { display: flex; }
+.justify-center { justify-content: center; }
+.gap-4 { gap: 1rem; }
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.gap-8 { gap: 2rem; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .neon-card {
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .neon-btn {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+  }
+}
